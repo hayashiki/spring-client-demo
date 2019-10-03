@@ -5,7 +5,7 @@ const request = (options) => {
     'Content-Type': 'application/json',
   })
   
-  // このデモではアクセストークンをローカルストレージに保存する
+  // このデモではアクセストークンをローカルストレージから取得する
   if(localStorage.getItem(ACCESS_TOKEN)) {
     headers.append('Authorization', 'Bearer ' + localStorage.getItem(ACCESS_TOKEN))
   }
@@ -31,7 +31,7 @@ export function getCurrentUser() {
   }
 
   return request({
-    url: API_BASE_URL + "/api/users/me",
+    url: API_BASE_URL + "/api/v2/user/me",
     method: 'GET'
   });
 }
@@ -54,7 +54,7 @@ export function signup(signupRequest) {
 
 export function refreshToken(tokenRequest) {
   return request({
-      url: API_BASE_URL + "/api/v2/auth/signup/email",
+      url: API_BASE_URL + "/api/v2/auth/refresh",
       method: 'POST',
       body: JSON.stringify(tokenRequest)
   });
